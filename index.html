@@ -1,83 +1,990 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delta Flow — GEO & AEO Optimization</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',sans-serif;color:#1a1a1a;background:#fff}
-nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid #eee}
-.logo{font-size:18px;font-weight:600;color:#1a1a1a}
-.nav-link{font-size:14px;color:#555;text-decoration:none}
-.hero{padding:5rem 2rem;max-width:700px;margin:0 auto;text-align:center}
-.badge{display:inline-block;background:#e8f4ff;color:#0066cc;font-size:12px;padding:4px 14px;border-radius:20px;margin-bottom:1.5rem}
-.hero h1{font-size:36px;font-weight:600;line-height:1.3;margin-bottom:1rem}
-.hero p{font-size:16px;color:#555;line-height:1.7;margin-bottom:2rem}
-.btn{display:inline-block;background:#0066cc;color:#fff;padding:12px 28px;border-radius:6px;text-decoration:none;font-size:15px}
-.services{padding:4rem 2rem;background:#f8f9fa}
-.services h2{text-align:center;font-size:24px;font-weight:600;margin-bottom:2.5rem}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:900px;margin:0 auto}
-.card{background:#fff;padding:1.5rem;border-radius:8px;border:1px solid #eee}
-.card h3{font-size:16px;font-weight:600;margin-bottom:8px}
-.card p{font-size:14px;color:#666;line-height:1.6}
-.faq{padding:4rem 2rem;max-width:700px;margin:0 auto}
-.faq h2{font-size:24px;font-weight:600;margin-bottom:2rem;text-align:center}
-.faq-item{border-bottom:1px solid #eee;padding:1.2rem 0}
-.faq-item h3{font-size:15px;font-weight:500;margin-bottom:8px}
-.faq-item p{font-size:14px;color:#666;line-height:1.6}
-footer{text-align:center;padding:2rem;font-size:13px;color:#999;border-top:1px solid #eee}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Delta Flow is an independent GEO and AEO learning lab exploring helpful content, entity clarity, structured data, and AI-search visibility.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#090b16">
+  <link rel="canonical" href="https://deltaflow.online/">
+
+  <title>Delta Flow — GEO & AEO Learning Lab</title>
+
+  <style>
+    :root {
+      --bg: #080b14;
+      --surface: rgba(18, 24, 42, 0.72);
+      --surface-solid: #12182a;
+      --line: rgba(255, 255, 255, 0.11);
+      --text: #f8fafc;
+      --muted: #a5b0c4;
+      --blue: #56a7ff;
+      --purple: #8c6cff;
+      --green: #66e3bb;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 3%, rgba(84, 117, 255, 0.18), transparent 31rem),
+        radial-gradient(circle at 85% 16%, rgba(149, 84, 255, 0.16), transparent 28rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1140px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 11, 20, 0.76);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      color: #06101e;
+      background: linear-gradient(135deg, #88ceff, #9774ff);
+      box-shadow: 0 0 26px rgba(105, 148, 255, 0.45);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 12px;
+      font-weight: 750;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .nav-cta {
+      padding: 10px 15px;
+      color: #07111e;
+      background: #f8fafc;
+      font-size: 13px;
+    }
+
+    .button {
+      padding: 14px 19px;
+      font-size: 15px;
+    }
+
+    .button-primary {
+      color: #07111e;
+      background: linear-gradient(135deg, #a0d8ff, #9d84ff);
+      box-shadow: 0 12px 35px rgba(104, 132, 255, 0.25);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-cta:hover,
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(86, 126, 255, 0.27);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 58px;
+      align-items: center;
+      min-height: 690px;
+      padding: 92px 0 78px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid rgba(119, 177, 255, 0.25);
+      border-radius: 999px;
+      color: #b8d8ff;
+      background: rgba(55, 108, 192, 0.14);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.03em;
+    }
+
+    .pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 5px rgba(102, 227, 187, 0.1);
+    }
+
+    h1,
+    h2,
+    h3 {
+      letter-spacing: -0.045em;
+      line-height: 1.08;
+    }
+
+    h1 {
+      max-width: 730px;
+      margin: 20px 0;
+      font-size: clamp(43px, 6vw, 76px);
+      font-weight: 850;
+    }
+
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(105deg, #a8ddff 13%, #a28bff 70%, #e1b7ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-copy {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 31px;
+    }
+
+    .mini-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 34px;
+      color: #bdc9dc;
+      font-size: 13px;
+    }
+
+    .mini-proof span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .check {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .dashboard {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border: 1px solid rgba(163, 193, 255, 0.2);
+      border-radius: 24px;
+      background:
+        linear-gradient(145deg, rgba(34, 46, 78, 0.86), rgba(12, 17, 31, 0.95));
+      box-shadow: var(--shadow);
+    }
+
+    .dashboard::before {
+      position: absolute;
+      inset: -100px auto auto -90px;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: rgba(108, 124, 255, 0.2);
+      filter: blur(20px);
+      content: "";
+    }
+
+    .dash-header,
+    .dash-row,
+    .score-row,
+    .source-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .dash-header {
+      margin-bottom: 25px;
+    }
+
+    .dash-title {
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .dash-live {
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: #a5f1d3;
+      background: rgba(48, 180, 129, 0.13);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      position: relative;
+    }
+
+    .metric {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric-value {
+      margin-top: 7px;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+    }
+
+    .metric-note {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .dash-panel {
+      position: relative;
+      margin-top: 12px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(3, 7, 15, 0.24);
+    }
+
+    .dash-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .score-row {
+      margin: 14px 0 10px;
+      font-size: 13px;
+    }
+
+    .score-number {
+      color: #c5d9ff;
+      font-weight: 850;
+    }
+
+    .progress {
+      width: 100%;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .progress > span {
+      display: block;
+      width: 73%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+    }
+
+    .source-row {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      color: #d6deec;
+      font-size: 12px;
+    }
+
+    .source-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .source-tag {
+      padding: 4px 7px;
+      border-radius: 6px;
+      color: #c2b3ff;
+      background: rgba(135, 107, 255, 0.15);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 40px;
+    }
+
+    .section-kicker {
+      color: #9bbcff;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-top: 12px;
+      font-size: clamp(32px, 4.2vw, 53px);
+      font-weight: 830;
+    }
+
+    .section-text {
+      max-width: 650px;
+      margin-top: 17px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(34, 42, 68, 0.55), rgba(16, 20, 34, 0.72));
+      transition: border 180ms ease, transform 180ms ease, background 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(138, 175, 255, 0.42);
+      background: linear-gradient(145deg, rgba(47, 57, 93, 0.72), rgba(17, 22, 39, 0.92));
+    }
+
+    .card-large {
+      grid-column: span 6;
+    }
+
+    .card-small {
+      grid-column: span 3;
+    }
+
+    .card-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(158, 188, 255, 0.22);
+      border-radius: 13px;
+      color: #cde0ff;
+      background: rgba(116, 144, 255, 0.13);
+      font-size: 19px;
+    }
+
+    .card h3 {
+      font-size: 21px;
+      font-weight: 780;
+    }
+
+    .card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 20px;
+      color: #d0daea;
+      font-size: 13px;
+    }
+
+    .card-list span::before {
+      margin-right: 8px;
+      color: var(--green);
+      content: "✓";
+    }
+
+    .process-wrap {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .principle-box {
+      padding: 30px;
+      border: 1px solid rgba(141, 169, 255, 0.2);
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(135, 102, 255, 0.24), transparent 230px),
+        rgba(23, 30, 50, 0.7);
+    }
+
+    .principle-box p {
+      margin-top: 17px;
+      color: var(--muted);
+    }
+
+    .principle-quote {
+      margin-top: 25px;
+      padding: 16px;
+      border-left: 3px solid var(--blue);
+      color: #deebff;
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 14px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 16px;
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      color: #09111f;
+      background: linear-gradient(135deg, #a2dcff, #8b74ff);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 770;
+    }
+
+    .step p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .faq {
+      max-width: 850px;
+    }
+
+    .faq-item {
+      padding: 23px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-item h3 {
+      font-size: 18px;
+      font-weight: 750;
+    }
+
+    .faq-item p {
+      max-width: 760px;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .cta {
+      padding: 50px;
+      overflow: hidden;
+      border: 1px solid rgba(153, 183, 255, 0.25);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 88% 7%, rgba(141, 98, 255, 0.43), transparent 280px),
+        radial-gradient(circle at 5% 100%, rgba(68, 164, 255, 0.3), transparent 260px),
+        #141b31;
+    }
+
+    .cta h2 {
+      max-width: 700px;
+    }
+
+    .cta p {
+      max-width: 620px;
+      margin-top: 16px;
+      color: #c2ccdd;
+    }
+
+    .cta .button {
+      margin-top: 25px;
+    }
+
+    footer {
+      padding: 32px 0 44px;
+      color: #8390a8;
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 800px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .process-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        gap: 44px;
+        min-height: auto;
+        padding: 72px 0 60px;
+      }
+
+      .card-large,
+      .card-small {
+        grid-column: span 12;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+
+      .cta {
+        padding: 31px 24px;
+      }
+    }
+
+    @media (max-width: 470px) {
+      .container {
+        width: min(100% - 28px, 1140px);
+      }
+
+      .nav-cta {
+        padding: 9px 11px;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://deltaflow.online/#business",
+        "name": "Delta Flow",
+        "url": "https://deltaflow.online/",
+        "email": "usamakk@deltaflow.online",
+        "description": "An independent GEO and AEO learning lab focused on helpful content, structured information, and AI-search visibility.",
+        "areaServed": "Worldwide",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://deltaflow.online/#website",
+        "url": "https://deltaflow.online/",
+        "name": "Delta Flow",
+        "publisher": {
+          "@id": "https://deltaflow.online/#business"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://deltaflow.online/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are GEO and AEO?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "GEO, or Generative Engine Optimization, focuses on making helpful brand information easier for generative AI systems to understand and use when relevant. AEO, or Answer Engine Optimization, focuses on structuring content so it directly addresses user questions across search experiences."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does GEO guarantee visibility in AI answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. No ethical SEO, AEO, or GEO practice can guarantee rankings, citations, or inclusion in AI-generated answers. The aim is to improve clarity, usefulness, technical accessibility, and evidence quality."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does Delta Flow focus on?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Delta Flow is an independent learning lab exploring content strategy, entity clarity, technical SEO, structured data, and evidence-led AI-search optimization."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
+
 <body>
-<nav>
-  <span class="logo">Delta Flow</span>
-  <a href="mailto:usamakk@deltaflow.online" class="nav-link">Contact</a>
-</nav>
-<div class="hero">
-  <div class="badge">GEO & AEO Specialist</div>
-  <h1>Get your business found by AI search engines</h1>
-  <p>Delta Flow helps businesses appear in ChatGPT, Perplexity, and Google AI answers — the new frontier of digital visibility.</p>
-  <a href="mailto:usamakk@deltaflow.online" class="btn">Get a free audit</a>
-</div>
-<div class="services">
-  <h2>Services</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>GEO Optimization</h3>
-      <p>Optimize your content so AI tools like ChatGPT and Perplexity recommend your brand.</p>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Delta Flow homepage">
+        <span class="brand-mark">↗</span>
+        <span>Delta Flow</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Capabilities</a>
+        <a href="#framework">Framework</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <a class="nav-cta" href="mailto:usamakk@deltaflow.online">Start a conversation →</a>
     </div>
-    <div class="card">
-      <h3>AEO Optimization</h3>
-      <p>Structure your content to appear in AI-generated answers and featured snippets.</p>
+  </nav>
+
+  <main id="top">
+    <section class="container hero">
+      <div>
+        <div class="eyebrow"><span class="pulse"></span> GEO & AEO LEARNING LAB</div>
+
+        <h1>
+          Make your expertise
+          <span class="gradient-text">easier to find, understand, and trust.</span>
+        </h1>
+
+        <p class="hero-copy">
+          Delta Flow explores practical methods for improving content clarity, entity signals,
+          structured information, and discoverability across modern search and AI-assisted answers.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#framework">Explore the framework <span>↓</span></a>
+          <a class="button button-secondary" href="mailto:usamakk@deltaflow.online">Contact Delta Flow <span>↗</span></a>
+        </div>
+
+        <div class="mini-proof">
+          <span><b class="check">✓</b> People-first content</span>
+          <span><b class="check">✓</b> Evidence-led optimisation</span>
+          <span><b class="check">✓</b> No ranking guarantees</span>
+        </div>
+      </div>
+
+      <aside class="dashboard" aria-label="Example AI visibility dashboard">
+        <div class="dash-header">
+          <div class="dash-title">AI Visibility Snapshot <span style="color:#7f8da5;font-weight:600;">— sample framework</span></div>
+          <span class="dash-live">LEARNING MODE</span>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="metric-label">Entity clarity</div>
+            <div class="metric-value">73<span style="color:#74839b;font-size:16px;">/100</span></div>
+            <div class="metric-note">↑ Audit signal</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-label">Answer coverage</div>
+            <div class="metric-value">24<span style="color:#74839b;font-size:16px;"> topics</span></div>
+            <div class="metric-note">+ Opportunity map</div>
+          </div>
+        </div>
+
+        <div class="dash-panel">
+          <div class="dash-label">Content readiness</div>
+          <div class="score-row">
+            <span>Helpful, structured, source-aware</span>
+            <span class="score-number">73%</span>
+          </div>
+          <div class="progress"><span></span></div>
+        </div>
+
+        <div class="dash-panel">
+          <div class="dash-label">Research priorities</div>
+          <div class="source-row">
+            <span>Question & intent mapping</span>
+            <span class="source-tag">AEO</span>
+          </div>
+          <div class="source-row">
+            <span>Entity & brand consistency</span>
+            <span class="source-tag">GEO</span>
+          </div>
+          <div class="source-row">
+            <span>Schema & technical clarity</span>
+            <span class="source-tag">SEO</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">Capabilities</div>
+          <h2>Build the signals that make information useful in modern search.</h2>
+          <p class="section-text">
+            Search results, AI summaries, and answer engines work differently—but they all benefit
+            from clear, accurate, well-structured, evidence-backed information.
+          </p>
+        </div>
+
+        <div class="bento">
+          <article class="card card-large">
+            <div class="card-icon">◈</div>
+            <h3>Generative Engine Optimisation</h3>
+            <p>
+              Improve how a brand, service, offer, and expertise are described across webpages
+              so AI systems can interpret the information with more confidence and context.
+            </p>
+            <div class="card-list">
+              <span>Entity and topical clarity</span>
+              <span>Original expert-led content plans</span>
+              <span>Source and evidence opportunities</span>
+            </div>
+          </article>
+
+          <article class="card card-small">
+            <div class="card-icon">⌕</div>
+            <h3>Answer-first content</h3>
+            <p>Turn real audience questions into clear, direct, genuinely useful answers.</p>
+          </article>
+
+          <article class="card card-small">
+            <div class="card-icon">✦</div>
+            <h3>Technical clarity</h3>
+            <p>Improve crawlability, page structure, metadata, internal links, and schema.</p>
+          </article>
+
+          <article class="card card-small">
+            <div class="card-icon">↗</div>
+            <h3>Authority research</h3>
+            <p>Identify credible places where useful expertise can earn legitimate mentions.</p>
+          </article>
+
+          <article class="card card-large">
+            <div class="card-icon">▣</div>
+            <h3>Content systems, not content clutter</h3>
+            <p>
+              A useful knowledge base connects service pages, practical guides, terminology,
+              methodology, proof, and frequently asked questions—without publishing generic AI filler.
+            </p>
+            <div class="card-list">
+              <span>Topic clusters and internal linking</span>
+              <span>Service, industry, and glossary pages</span>
+              <span>Content refresh and quality checks</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="framework">
+      <div class="container">
+        <div class="section-heading">
+          <div class="section-kicker">The Delta Flow framework</div>
+          <h2>A practical way to learn GEO and AEO—without chasing shortcuts.</h2>
+        </div>
+
+        <div class="process-wrap">
+          <aside class="principle-box">
+            <div class="section-kicker">Working principle</div>
+            <h3 style="font-size:30px;margin-top:12px;">Make the page valuable before making it visible.</h3>
+            <p>
+              Sustainable visibility begins with solving a real problem clearly. Optimisation should
+              help search systems understand the same useful information that people see.
+            </p>
+            <div class="principle-quote">
+              “Optimise for understanding, evidence, usability, and trust—not a promised AI mention.”
+            </div>
+          </aside>
+
+          <div class="steps">
+            <article class="step">
+              <div class="step-number">01</div>
+              <div>
+                <h3>Map questions and intent</h3>
+                <p>Document what a buyer asks before, during, and after choosing a service. Group questions by intent, urgency, and context.</p>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">02</div>
+              <div>
+                <h3>Publish a clear answer system</h3>
+                <p>Create pages that define your offer, explain your method, show constraints, and answer follow-up questions in plain language.</p>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">03</div>
+              <div>
+                <h3>Strengthen evidence and entities</h3>
+                <p>Keep brand details consistent, cite reliable sources where appropriate, and add authentic examples, authorship, and business information.</p>
+              </div>
+            </article>
+
+            <article class="step">
+              <div class="step-number">04</div>
+              <div>
+                <h3>Measure, learn, and improve</h3>
+                <p>Use Search Console, page testing, query research, and periodic content reviews to improve what users and search systems can discover.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container faq">
+        <div class="section-heading">
+          <div class="section-kicker">FAQs</div>
+          <h2>Questions worth answering clearly.</h2>
+        </div>
+
+        <article class="faq-item">
+          <h3>What are GEO and AEO?</h3>
+          <p>
+            GEO—Generative Engine Optimisation—focuses on making useful brand information easier for
+            generative AI systems to understand and use when relevant. AEO—Answer Engine Optimisation—
+            focuses on structuring content to answer user questions directly across modern search experiences.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does GEO guarantee that ChatGPT, Google AI, or Perplexity will cite a website?</h3>
+          <p>
+            No. Visibility in any search result or AI-generated answer cannot be guaranteed. Ethical
+            optimisation improves clarity, quality, technical accessibility, and evidence—not a promised placement.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What is Delta Flow currently building?</h3>
+          <p>
+            Delta Flow is an independent learning lab focused on practical research into content systems,
+            entity clarity, structured data, technical SEO, and AI-search discoverability.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Why does structured data matter?</h3>
+          <p>
+            Structured data gives search engines standardised context about what a page contains. It
+            should always match the visible content and must never be used to mislead users or search engines.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="cta">
+          <div class="section-kicker">Build in public. Learn with intent.</div>
+          <h2>Turning a new site into a practical GEO & AEO test environment.</h2>
+          <p>
+            Delta Flow is evolving through real-world experimentation: publishing useful pages, validating
+            technical foundations, tracking discovery, and improving the clarity of every answer.
+          </p>
+          <a class="button button-primary" href="mailto:usamakk@deltaflow.online">Start a conversation <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Delta Flow. Independent GEO & AEO learning lab.</span>
+      <a href="mailto:usamakk@deltaflow.online">usamakk@deltaflow.online</a>
     </div>
-    <div class="card">
-      <h3>Authority Building</h3>
-      <p>Citations, backlinks, and directory listings that build trust with AI tools.</p>
-    </div>
-    <div class="card">
-      <h3>AI Content Strategy</h3>
-      <p>FAQ pages, schema markup, and structured content that AI engines love.</p>
-    </div>
-  </div>
-</div>
-<div class="faq">
-  <h2>Common questions</h2>
-  <div class="faq-item">
-    <h3>What is GEO and how is it different from SEO?</h3>
-    <p>GEO focuses on making your brand appear in AI-generated answers on platforms like ChatGPT and Perplexity. Traditional SEO targets Google blue links — GEO targets AI answers replacing them.</p>
-  </div>
-  <div class="faq-item">
-    <h3>How long does it take to see results?</h3>
-    <p>Most clients see improvements in AI visibility within 4 to 8 weeks.</p>
-  </div>
-  <div class="faq-item">
-    <h3>Do you work with international clients?</h3>
-    <p>Yes. Delta Flow works with clients worldwide via Fiverr and Upwork.</p>
-  </div>
-</div>
-<footer>
-  © 2026 Delta Flow — Karachi, Pakistan | deltaflow.online
-</footer>
+  </footer>
 </body>
 </html>
