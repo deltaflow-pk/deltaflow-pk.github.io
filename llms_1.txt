@@ -1,0 +1,50 @@
+# Delta Flow
+
+> Delta Flow is a GEO (Generative Engine Optimization) and AEO (Answer Engine Optimization) agency based in Karachi, Pakistan. It helps brands become easier for AI tools like ChatGPT, Perplexity and Claude to understand, trust and mention.
+
+Delta Flow focuses only on GEO and AEO. It does not guarantee placement in AI-generated answers, because no one can. Work is based on clear structure, consistent brand information and trusted online presence.
+
+## Services
+
+- AI visibility audit: testing what ChatGPT, Perplexity and Claude say about a brand today
+- Answer-first content: pages and FAQs written so AI tools can use them as direct answers
+- Structured data: FAQ, Organization and business schema markup
+- Brand consistency: same name, descriptions and details across websites and profiles
+- Authority building: citations and trusted mentions across the web
+- Re-testing: checking AI answers again after changes
+
+## Key pages
+
+- [Delta Flow homepage](https://deltaflow.online/): services, About, founder and FAQs
+- [Pricing](https://deltaflow.online/pricing.html): Free Mini Audit ($0), AI Visibility Audit (from $40), GEO and AEO Setup (from $99), in US dollars
+- [Sitemap](https://deltaflow.online/sitemap.xml)
+
+## Pricing
+
+- Free Mini Audit: $0
+- AI Visibility Audit: from $40
+- GEO and AEO Setup: from $99
+- Final scope and price are confirmed before work starts. No monthly retainers at this time.
+
+## Company details
+
+- Name: Delta Flow
+- Type: GEO and AEO agency
+- Founder: Usama KK
+- Location: Karachi, Pakistan
+- Contact: deltaflow.online@gmail.com
+
+## Official profiles
+
+- [LinkedIn company page](https://www.linkedin.com/company/deltaflow-online/)
+- [Clutch profile](https://clutch.co/profile/delta-flow)
+- [Facebook page](https://www.facebook.com/profile.php?id=61595238053242)
+- [X (Twitter)](https://x.com/DeltaFlowGEO)
+- [Instagram](https://www.instagram.com/deltaflowgeo)
+- [Reddit](https://www.reddit.com/user/DeltaFlow-pk)
+- [Quora](https://www.quora.com/profile/Delta-Flow-2)
+- [Medium](https://medium.com/@deltaflow.online)
+
+## Optional
+
+- Topics covered: GEO, AEO, AI search visibility, answer-first content, schema markup, brand consistency, citations
