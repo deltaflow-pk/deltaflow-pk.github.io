@@ -16,7 +16,15 @@ Delta Flow focuses only on GEO and AEO. It does not guarantee placement in AI-ge
 ## Key pages
 
 - [Delta Flow homepage](https://deltaflow.online/): services, About, founder and FAQs
+- [Pricing](https://deltaflow.online/pricing.html): Free Mini Audit ($0), AI Visibility Audit (from $40), GEO and AEO Setup (from $99), in US dollars
 - [Sitemap](https://deltaflow.online/sitemap.xml)
+
+## Pricing
+
+- Free Mini Audit: $0
+- AI Visibility Audit: from $40
+- GEO and AEO Setup: from $99
+- Final scope and price are confirmed before work starts. No monthly retainers at this time.
 
 ## Company details
 
